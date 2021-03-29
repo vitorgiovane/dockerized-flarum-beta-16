@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: "${PROJECT_SLUG}-mysql"
+    build:
+      context: ./
+      dockerfile: ./docker/mysql/Dockerfile
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    restart: "always"
+    ports:
+      - "${DB_EXTERNAL_PORT}:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=${DB_ALLOW_EMPTY_PASSWORD}
+    networks:
+      - app-network
+
+  php:
+    container_name: "${PROJECT_SLUG}-php"
+    build:
+      context: ./docker/php
+    volumes:
+      - ./:/atmosphere
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    restart: "always"
+    networks:
+      - app-network
+
+  nginx:
+    container_name: "${PROJECT_SLUG}-nginx"
+    build:
+      context: ./docker/nginx
+    tty: true
+    environment:
+      SERVICE_NAME: ${PROJECT_SLUG}-nginx
+      SERVICE_TAGS: dev
+    working_dir: /atmosphere
+    restart: "always"
+    volumes:
+      - ./:/atmosphere
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "${NGINX_PORT}:80"
+    links:
+      - "php"
+      - "mysql"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
