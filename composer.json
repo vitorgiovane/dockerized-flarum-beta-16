@@ -21,12 +21,15 @@
         "docs": "https://flarum.org/docs/"
     },
     "require": {
-        "flarum/core": "^0.1.0",
+        "askvortsov/flarum-checklist": "*",
+        "askvortsov/flarum-discussion-templates": "^0.7.0",
+        "askvortsov/flarum-rich-text": "*",
         "flarum/approval": "^0.1.0",
         "flarum/bbcode": "^0.1.0",
+        "flarum/core": "^0.1.0",
         "flarum/emoji": "^0.1.0",
-        "flarum/lang-english": "^0.1.0",
         "flarum/flags": "^0.1.0",
+        "flarum/lang-english": "^0.1.0",
         "flarum/likes": "^0.1.0",
         "flarum/lock": "^0.1.0",
         "flarum/markdown": "^0.1.0",
@@ -37,7 +40,18 @@
         "flarum/sticky": "^0.1.0",
         "flarum/subscriptions": "^0.1.0",
         "flarum/suspend": "^0.1.0",
-        "flarum/tags": "^0.1.0"
+        "flarum/tags": "^0.1.0",
+        "fof/drafts": "^0.4.0",
+        "fof/formatting": "^0.4.0",
+        "fof/linguist": "^0.6.0",
+        "fof/nightmode": "^0.8.0",
+        "fof/oauth": "^0.3.0",
+        "fof/profile-image-crop": "^0.3.0",
+        "fof/upload": "0.14.0-beta",
+        "fof/user-bio": "^0.5.0",
+        "fof/user-directory": "^0.6.0",
+        "sycho/flarum-profile-cover": "^1.2",
+        "tiu-ram0n/brazilian-portuguese": "^1.1"
     },
     "config": {
         "preferred-install": "dist",
